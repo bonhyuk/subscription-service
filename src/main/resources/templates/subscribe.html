@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>구독 신청</title>
+</head>
+<body>
+<h2>구독 신청</h2>
+<form th:action="@{/subscribe}" method="post">
+  <button type="submit">구독하기</button>
+</form>
+<a th:href="@{/home}">홈으로 돌아가기</a>
+</body>
+</html>

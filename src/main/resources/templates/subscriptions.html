@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>구독 상품 목록</title>
+</head>
+<body>
+<h1>구독 상품 목록</h1>
+
+<table border="1">
+  <thead>
+  <tr><th>상품명</th><th>설명</th><th>가격</th><th>구독 신청</th></tr>
+  </thead>
+  <tbody>
+  <tr th:each="product : ${products}">
+    <td th:text="${product.name}">상품명</td>
+    <td th:text="${product.description}">설명</td>
+    <td th:text="${product.price}">가격</td>
+    <td><a th:href="@{'/subscriptions/subscribe/' + ${product.id}}">구독 신청</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<a th:href="@{/hello}">홈으로</a>
+</body>
+</html>

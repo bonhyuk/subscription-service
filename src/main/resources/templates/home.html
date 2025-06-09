@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>홈 화면</title>
+</head>
+<body>
+<h1>안녕하세요, <span th:text="${user.name}">사용자</span>님!</h1>
+
+<!-- 구독 상태 체크 -->
+<div th:if="${user.subscribed}">
+  <p>이미 구독 중입니다.</p>
+  <form th:action="@{/unsubscribe}" method="post">
+    <button type="submit">구독 취소</button>
+  </form>
+</div>
+
+<div th:unless="${user.subscribed}">
+  <p>구독 중이 아닙니다.</p>
+  <a th:href="@{/subscribe}">구독 신청하기</a>
+</div>
+
+<a th:href="@{/logout}">로그아웃</a>
+</body>
+</html>
