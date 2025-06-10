@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>홈 화면</title>
+  <title>홈</title>
 </head>
 <body>
-<h1>안녕하세요, <span th:text="${user.name}">사용자</span>님!</h1>
+<h2>홈 페이지</h2>
 
-<!-- 구독 상태 체크 -->
-<div th:if="${user.subscribed}">
-  <p>이미 구독 중입니다.</p>
-  <form th:action="@{/unsubscribe}" method="post">
-    <button type="submit">구독 취소</button>
-  </form>
-</div>
+<!-- 로그인한 사용자 이름 표시 -->
+<p th:if="${session.loggedInUser != null}">
+  안녕하세요, <span th:text="${session.loggedInUser.username}">사용자</span>님!
+</p>
 
-<div th:unless="${user.subscribed}">
-  <p>구독 중이 아닙니다.</p>
-  <a th:href="@{/subscribe}">구독 신청하기</a>
-</div>
+<!-- 로그인하지 않은 경우 -->
+<p th:if="${session.loggedInUser == null}">
+  로그인이 필요합니다. <a th:href="@{/login}">로그인</a>
+</p>
 
-<a th:href="@{/logout}">로그아웃</a>
+<!-- 로그아웃 버튼 (로그인한 경우에만 보임) -->
+<p th:if="${session.loggedInUser != null}">
+  <a th:href="@{/logout}">로그아웃</a>
+</p>
+
+<!-- 추후 구독 상품 목록으로 이동 링크 -->
+<p th:if="${session.loggedInUser != null}">
+  <a th:href="@{/subscriptions}">구독 상품 보기</a>
+</p>
 </body>
 </html>

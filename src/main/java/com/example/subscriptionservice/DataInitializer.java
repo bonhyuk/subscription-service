@@ -2,30 +2,30 @@ package com.example.subscriptionservice;
 
 import com.example.subscriptionservice.domain.SubscriptionProduct;
 import com.example.subscriptionservice.repository.SubscriptionProductRepository;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
-public class DataInitializer {
+public class DataInitializer implements CommandLineRunner {
 
-    private final SubscriptionProductRepository productRepository;
+    private final SubscriptionProductRepository repository;
 
-    @PostConstruct
-    public void init() {
-        if (productRepository.count() == 0) {
-            SubscriptionProduct p1 = new SubscriptionProduct();
-            p1.setName("프리미엄 구독");
-            p1.setDescription("월간 프리미엄 구독 서비스");
-            p1.setPrice(15000);
-            productRepository.save(p1);
+    public DataInitializer(SubscriptionProductRepository repository) {
+        this.repository = repository;
+    }
 
-            SubscriptionProduct p2 = new SubscriptionProduct();
-            p2.setName("기본 구독");
-            p2.setDescription("기본 구독 서비스");
-            p2.setPrice(8000);
-            productRepository.save(p2);
-        }
+    @Override
+    public void run(String... args) throws Exception {
+        repository.save(SubscriptionProduct.builder()
+                .name("베이직 구독")
+                .description("기본 구독 서비스")
+                .price(10000)
+                .build());
+
+        repository.save(SubscriptionProduct.builder()
+                .name("프리미엄 구독")
+                .description("고급 구독 서비스")
+                .price(20000)
+                .build());
     }
 }

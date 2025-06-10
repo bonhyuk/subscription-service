@@ -4,22 +4,30 @@
   <title>구독 상품 목록</title>
 </head>
 <body>
-<h1>구독 상품 목록</h1>
+<h2>구독 상품 목록</h2>
 
 <table border="1">
   <thead>
-  <tr><th>상품명</th><th>설명</th><th>가격</th><th>구독 신청</th></tr>
+  <tr>
+    <th>상품명</th>
+    <th>가격</th>
+    <th>설명</th>
+    <th>구독하기</th>
+  </tr>
   </thead>
   <tbody>
+  <!-- products 리스트 반복 출력 -->
   <tr th:each="product : ${products}">
     <td th:text="${product.name}">상품명</td>
-    <td th:text="${product.description}">설명</td>
     <td th:text="${product.price}">가격</td>
-    <td><a th:href="@{'/subscriptions/subscribe/' + ${product.id}}">구독 신청</a></td>
+    <td th:text="${product.description}">설명</td>
+    <td>
+      <a th:href="@{'/subscriptions/subscribe/' + ${product.id}}">구독 신청</a>
+    </td>
   </tr>
   </tbody>
 </table>
 
-<a th:href="@{/hello}">홈으로</a>
+<a th:href="@{/home}">홈으로 돌아가기</a>
 </body>
 </html>

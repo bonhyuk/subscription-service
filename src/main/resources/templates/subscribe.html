@@ -1,13 +1,26 @@
+<!-- src/main/resources/templates/subscribe.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>구독 신청</title>
 </head>
 <body>
-<h2>구독 신청</h2>
-<form th:action="@{/subscribe}" method="post">
-  <button type="submit">구독하기</button>
-</form>
-<a th:href="@{/home}">홈으로 돌아가기</a>
+<h1>구독 신청</h1>
+
+<div th:if="${product != null}">
+  <p>상품명: <strong th:text="${product.name}">상품 이름</strong></p>
+  <p>가격: <strong th:text="${product.price}">10000</strong>원 / 월</p>
+
+  <form th:action="@{/subscriptions/subscribe}" method="post">
+    <input type="hidden" name="productId" th:value="${product.id}"/>
+    <button type="submit">구독 신청</button>
+  </form>
+</div>
+
+<div th:if="${error != null}">
+  <p style="color:red;" th:text="${error}">에러 메시지</p>
+</div>
+
+<a href="/">홈으로</a>
 </body>
 </html>
