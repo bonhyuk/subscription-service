@@ -26,8 +26,6 @@ public class SubscriptionScheduler {
         for (Subscription sub : expiringSubs) {
             if (sub.isAutoRenew()) {
                 sub.setEndDate(sub.getEndDate().plusMonths(1)); // 1개월 연장 예시
-            } else {
-                sub.setStatus(SubscriptionStatus.EXPIRED);
             }
             repository.save(sub);
         }

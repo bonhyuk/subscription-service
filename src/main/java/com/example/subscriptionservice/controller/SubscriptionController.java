@@ -2,6 +2,7 @@ package com.example.subscriptionservice.controller;
 
 import com.example.subscriptionservice.domain.Subscription;
 import com.example.subscriptionservice.domain.SubscriptionProduct;
+import com.example.subscriptionservice.domain.User;
 import com.example.subscriptionservice.repository.SubscriptionProductRepository;
 import com.example.subscriptionservice.service.SubscriptionService;
 import jakarta.servlet.http.HttpSession;
@@ -99,7 +100,10 @@ public class SubscriptionController {
         if (loggedInUser == null) {
             return "redirect:/login";
         }
-        Long userId = (Long) loggedInUser;
+
+        // 올바르게 User 타입으로 캐스팅
+        User user = (User) loggedInUser;
+        Long userId = user.getId();  // User 클래스에 getId() 메서드가 있다고 가정
 
         List<Subscription> subscriptions = subscriptionService.getSubscriptionsByUserId(userId);
         model.addAttribute("subscriptions", subscriptions);

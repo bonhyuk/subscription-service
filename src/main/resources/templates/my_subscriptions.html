@@ -1,16 +1,33 @@
+<!-- 경로: src/main/resources/templates/my_subscriptions.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>내 구독 내역</title>
 </head>
 <body>
-<h1>내 구독 내역 화면</h1>
-<p>구독 리스트를 아래에 표시합니다.</p>
-<ul>
-    <li th:each="sub : ${subscriptions}">
-        <span th:text="${sub.productName}">상품명</span> -
-        <span th:text="${sub.status}">상태</span>
-    </li>
-</ul>
+<h1>내 구독 내역</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>상품명</th>
+        <th>상태</th>
+        <th>시작일</th>
+        <th>종료일</th>
+        <th>자동 갱신</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subscription : ${subscriptions}">
+        <td th:text="${subscription.product.name}">상품명</td>
+        <td th:text="${subscription.status}">상태</td>
+        <td th:text="${subscription.startDate}">시작일</td>
+        <td th:text="${subscription.endDate}">종료일</td>
+        <td th:text="${subscription.autoRenew}">자동갱신</td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/">홈으로 돌아가기</a>
 </body>
 </html>

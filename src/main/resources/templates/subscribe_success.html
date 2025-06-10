@@ -9,7 +9,8 @@
 
 <p th:text="${message}">구독이 성공적으로 처리되었습니다.</p>
 
-<a href="/">홈으로</a> |
-<a href="/my-subscriptions">내 구독 내역 보기</a>
+<a th:href="@{/home}">홈으로 돌아가기</a>
+<a th:href="@{/subscriptions/my-subscriptions}">내 구독 내역 보기</a>
+
 </body>
 </html>
