@@ -1,31 +1,37 @@
-// 경로: src/main/java/com/example/subscriptionservice/domain/Subscription.java
 package com.example.subscriptionservice.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "subscription")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Subscription {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId; // 로그인한 사용자 ID
-
+    // 구독 사용자 (User 엔티티와 다대일 관계)
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    // 구독 상품 (SubscriptionProduct와 다대일 관계)
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     private SubscriptionProduct product;
 
-    @Enumerated(EnumType.STRING)
-    private SubscriptionStatus status;
+    private LocalDate startDate;    // 구독 시작일
+    private LocalDate endDate;      // 구독 종료일
 
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean autoRenew;
+    @Enumerated(EnumType.STRING)
+    private SubscriptionStatus status;  // 구독 상태
+
+    private boolean autoRenew;  // 자동 갱신 여부
 }

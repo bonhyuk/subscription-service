@@ -1,29 +1,21 @@
-// SubscriptionProduct.java
-// 경로: com.example.subscriptionservice.domain.SubscriptionProduct
-
 package com.example.subscriptionservice.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "subscription_product")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "subscription_product")
 public class SubscriptionProduct {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private int price;
-
-    private String description;
+    private String name;         // 구독 상품명
+    private String description;  // 상품 설명
+    private Integer price;       // 가격 (원 단위)
 }

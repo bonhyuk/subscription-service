@@ -1,26 +1,25 @@
-// User.java
-// 경로: com.example.subscriptionservice.domain.User
-
 package com.example.subscriptionservice.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity // 이 클래스가 JPA 엔티티(데이터베이스 테이블과 매핑)임을 나타냄
-@Getter @Setter // Lombok: getter/setter 자동 생성
-@NoArgsConstructor // 기본 생성자 자동 생성
-@AllArgsConstructor // 모든 필드 생성자 자동 생성
-@Builder // builder 패턴 사용 가능하게 함
-@Table(name = "users")  // 테이블명 user 대신 users 사용
+@Entity // JPA가 관리하는 엔티티임을 표시
+@Table(name = "users") // DB 테이블명 users와 매핑
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
-
-    @Id // 기본 키(primary key) 지정
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가 설정
+    @Id // PK 컬럼 지정
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가 전략 사용
     private Long id;
 
-    @Column(nullable = false, unique = true) // 중복 허용 안됨
-    private String username; // 사용자 아이디
+    @Column(unique = true, nullable = false) // username은 유니크하며 null 불가
+    private String username;
 
-    @Column(nullable = false)
-    private String password; // 사용자 비밀번호
+    @Column(nullable = false) // password도 null 불가
+    private String password;
+
+    private String email;
 }
